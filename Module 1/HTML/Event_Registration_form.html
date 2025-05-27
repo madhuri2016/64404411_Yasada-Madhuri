@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Event Registration</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    input[type="submit"] {
+      background-color: #28a745;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      margin-top: 20px;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #218838;
+    }
+
+    output {
+      display: block;
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #d1ecf1;
+      border: 1px solid #bee5eb;
+      color: #0c5460;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Event Registration Form</h2>
+
+  <form onsubmit="handleSubmit(event)">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" placeholder="Enter your name" required autofocus />
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" placeholder="Enter your email" required />
+
+    <label for="date">Date of Event:</label>
+    <input type="date" id="date" name="date" required />
+
+    <label for="eventType">Event Type:</label>
+    <select id="eventType" name="eventType" required>
+      <option value="">-- Select Event --</option>
+      <option value="Cultural Fest">Cultural Fest</option>
+      <option value="Workshop">Workshop</option>
+      <option value="Sports Day">Sports Day</option>
+    </select>
+
+    <label for="message">Message:</label>
+    <textarea id="message" name="message" rows="4" placeholder="Any additional information..."></textarea>
+
+    <input type="submit" value="Register" />
+
+    <output id="confirmation"></output>
+  </form>
+
+  <script>
+    function handleSubmit(event) {
+      event.preventDefault();
+      const name = document.getElementById("name").value;
+      const output = document.getElementById("confirmation");
+      output.textContent = `Thank you, ${name}, for registering! We'll contact you soon.`;
+      event.target.reset();
+    }
+  </script>
+
+</body>
+</html>

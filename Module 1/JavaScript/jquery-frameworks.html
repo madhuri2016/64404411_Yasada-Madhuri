@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>jQuery and JS Frameworks Example</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    .event-card {
+      display: none;
+      padding: 10px;
+      border: 1px solid #ccc;
+      margin: 10px 0;
+      width: 200px;
+    }
+  </style>
+</head>
+<body>
+
+  <button id="registerBtn">Register</button>
+
+  <div class="event-card" id="event1">Rock Concert</div>
+  <div class="event-card" id="event2">Baking Workshop</div>
+
+  <div id="benefit" style="margin-top:20px; font-style: italic; color: #333;">
+   
+  </div>
+
+  <script>
+    $(document).ready(function() {
+     
+      $('#registerBtn').click(function() {
+        console.log("Register button clicked");
+
+        $('.event-card').each(function() {
+          if ($(this).is(':visible')) {
+            $(this).fadeOut();
+          } else {
+            $(this).fadeIn();
+          }
+        });
+      });
+
+      const benefitText = "Benefit of React or Vue: They provide declarative and reactive UI updates which simplify complex DOM manipulations, making code more maintainable and scalable.";
+      $('#benefit').text(benefitText);
+    });
+  </script>
+
+</body>
+</html>

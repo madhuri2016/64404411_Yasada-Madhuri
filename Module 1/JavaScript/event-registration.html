@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Event Registration Form</title>
+  <style>
+    form {
+      max-width: 400px;
+      margin: 20px auto;
+      font-family: Arial, sans-serif;
+    }
+    label {
+      display: block;
+      margin-top: 12px;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 4px;
+      box-sizing: border-box;
+    }
+    .error {
+      color: red;
+      font-size: 0.9em;
+      margin-top: 2px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px;
+      width: 100%;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .success-message {
+      color: green;
+      margin-top: 15px;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h2 style="text-align:center;">Event Registration</h2>
+
+  <form id="registrationForm" novalidate>
+    <label for="name">Name:
+      <input type="text" id="name" name="name" />
+      <div class="error" id="nameError"></div>
+    </label>
+
+    <label for="email">Email:
+      <input type="email" id="email" name="email" />
+      <div class="error" id="emailError"></div>
+    </label>
+
+    <label for="eventSelect">Select Event:
+      <select id="eventSelect" name="eventSelect">
+        <option value="">-- Choose an event --</option>
+        <option value="rock">Rock Concert</option>
+        <option value="baking">Baking Workshop</option>
+        <option value="jazz">Jazz Night</option>
+      </select>
+      <div class="error" id="eventError"></div>
+    </label>
+
+    <button type="submit">Register</button>
+  </form>
+
+  <div class="success-message" id="successMessage"></div>
+
+  <script>
+    const form = document.getElementById('registrationForm');
+    const nameInput = form.elements['name'];
+    const emailInput = form.elements['email'];
+    const eventSelect = form.elements['eventSelect'];
+
+    const nameError = document.getElementById('nameError');
+    const emailError = document.getElementById('emailError');
+    const eventError = document.getElementById('eventError');
+    const successMessage = document.getElementById('successMessage');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); 
+
+      nameError.textContent = '';
+      emailError.textContent = '';
+      eventError.textContent = '';
+      successMessage.textContent = '';
+
+      let isValid = true;
+
+      if (!nameInput.value.trim()) {
+        nameError.textContent = 'Please enter your name.';
+        isValid = false;
+      }
+
+      if (!emailInput.value.trim()) {
+        emailError.textContent = 'Please enter your email.';
+        isValid = false;
+      } else if (!validateEmail(emailInput.value.trim())) {
+        emailError.textContent = 'Please enter a valid email address.';
+        isValid = false;
+      }
+
+      if (!eventSelect.value) {
+        eventError.textContent = 'Please select an event.';
+        isValid = false;
+      }
+
+      if (isValid) {
+        successMessage.textContent = `Thank you, ${nameInput.value.trim()}! You have registered for the ${eventSelect.options[eventSelect.selectedIndex].text}.`;
+        form.reset();
+      }
+    });
+
+    function validateEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+  </script>
+
+</body>
+</html>

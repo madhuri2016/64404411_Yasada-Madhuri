@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community Portal</title>
+
+  <style>
+    #welcomeBanner {
+      background-color: #007BFF;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 1.5rem;
+    }
+
+    .highlight {
+      background-color: yellow;
+      padding: 3px;
+      border-radius: 4px;
+    }
+   
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      gap: 15px;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 10px;
+    }
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+   
+    table {
+      margin: 20px auto;
+      border-spacing: 20px;
+    }
+    .gallery-img {
+      width: 100%;
+      max-width: 200px;
+      border: 3px solid #444;
+      border-radius: 8px;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+    }
+    figcaption {
+      text-align: center;
+      margin-top: 5px;
+      font-style: italic;
+    }
+    
+    footer {
+      text-align: center;
+      padding: 10px 0;
+      background: #f4f4f4;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="welcomeBanner">
+    Welcome back, <span class="highlight">User</span>!
+    <span style="color: red; font-weight: bold;">Special Offer: 50% off today only!</span>
+  </div>
+
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="help.html" target="_blank">Help</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <section id="home">
+      <h1 class="highlight">Welcome to the Portal</h1>
+      <p>This is the home section.</p>
+    </section>
+
+    <section id="events">
+      <h2>Events</h2>
+      <p>Details about upcoming events will appear here.</p>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Contact us at: info@example.com</p>
+    </section>
+
+    <section id="gallery">
+      <h2>Community Events Gallery</h2>
+      <table>
+        <tr>
+          <td>
+            <figure>
+              <img src="image1.jpg" alt="Tree Plantation Drive" title="Tree Plantation Drive" class="gallery-img">
+              <figcaption>Tree Plantation Drive</figcaption>
+            </figure>
+          </td>
+          <td>
+            <figure>
+              <img src="image2.jpg" alt="Charity Run" title="Charity Run 2024" class="gallery-img">
+              <figcaption>Charity Run 2024</figcaption>
+            </figure>
+          </td>
+          <td>
+            <figure>
+              <img src="image3.jpg" alt="Health Camp" title="Free Health Camp" class="gallery-img">
+              <figcaption>Free Health Camp</figcaption>
+            </figure>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <figure>
+              <img src="image4.jpg" alt="Art Exhibition" title="Local Art Exhibition" class="gallery-img">
+              <figcaption>Local Art Exhibition</figcaption>
+            </figure>
+          </td>
+          <td>
+            <figure>
+              <img src="image5.jpg" alt="Food Drive" title="Community Food Drive" class="gallery-img">
+              <figcaption>Community Food Drive</figcaption>
+            </figure>
+          </td>
+          <td>
+            <figure>
+              <img src="image6.jpg" alt="Workshop" title="Youth Skill Workshop" class="gallery-img">
+              <figcaption>Youth Skill Workshop</figcaption>
+            </figure>
+          </td>
+        </tr>
+      </table>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 My Portal</p>
+  </footer>
+
+</body>
+</html>

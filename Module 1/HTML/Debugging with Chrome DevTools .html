@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Debug Example</title>
+  <style>
+    .container {
+      width: 80%;
+      margin: auto;
+      text-align: center;
+      margin-top: 100px;
+    }
+
+    h1 {
+      color: blue;
+      font-size: 3rem;
+    }
+
+    #clickMe {
+      padding: 20px;
+      font-size: 1rem;
+      position: absolute; 
+      left: -200px;        
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 id="title">Welcome to Debugging 101</h1>
+    <button id="clickMe">Click Me</button>
+    <p id="output"></p>
+  </div>
+
+  <script>
+    document.getElementById("clickMe").addEventListener("click", function () {
+      const message = getGreetingMessage();
+      document.getElementById("output").textContent = message;
+    });
+
+   
+    function getGreetingMessage() {
+      let hour = new Date().getHours(); 
+
+      if (hour < 12) {
+        return "Good morning!";
+      } else if (hour < 18) {
+        return "Good afternoon!";
+      } else {
+        return "Good evening!";
+      }
+
+      
+      console.log("This won't run");
+    }
+  </script>
+</body>
+</html>

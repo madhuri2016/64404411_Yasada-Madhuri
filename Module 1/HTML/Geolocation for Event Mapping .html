@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Geolocation for Event Mapping</title>
+  <style>
+    #output {
+      margin-top: 15px;
+      font-weight: bold;
+      color: #333;
+    }
+    #error {
+      color: red;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Locate Nearest Event</h2>
+
+  <button id="findEventsBtn">Find Nearby Events</button>
+
+  <div id="output"></div>
+  <div id="error"></div>
+
+  <script>
+    const btn = document.getElementById('findEventsBtn');
+    const output = document.getElementById('output');
+    const errorDiv = document.getElementById('error');
+
+    btn.addEventListener('click', () => {
+      output.textContent = "Locating...";
+      errorDiv.textContent = "";
+
+      if (!navigator.geolocation) {
+        errorDiv.textContent = "Geolocation is not supported by your browser.";
+        output.textContent = "";
+        return;
+      }
+
+      const options = {
+        enableHighAccuracy: true,
+        timeout: 10000,        
+        maximumAge: 0         
+      };
+
+      navigator.geolocation.getCurrentPosition(success, error, options);
+
+      function success(position) {
+        const lat = position.coords.latitude.toFixed(6);
+        const lon = position.coords.longitude.toFixed(6);
+        output.textContent = `Your current location is:\nLatitude: ${lat}, Longitude: ${lon}`;
+      }
+
+      function error(err) {
+        output.textContent = "";
+        switch(err.code) {
+          case err.PERMISSION_DENIED:
+            errorDiv.textContent = "Permission denied. Please allow location access.";
+            break;
+          case err.POSITION_UNAVAILABLE:
+            errorDiv.textContent = "Position unavailable.";
+            break;
+          case err.TIMEOUT:
+            errorDiv.textContent = "Location request timed out.";
+            break;
+          default:
+            errorDiv.textContent = "An unknown error occurred.";
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

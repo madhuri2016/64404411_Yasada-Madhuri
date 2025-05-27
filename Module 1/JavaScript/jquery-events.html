@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>jQuery Example</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    .event-card { display: none; padding: 10px; border: 1px solid #ccc; margin: 10px 0; }
+  </style>
+</head>
+<body>
+
+  <button id="registerBtn">Register</button>
+
+  <div class="event-card" id="event1">Rock Concert</div>
+  <div class="event-card" id="event2">Baking Workshop</div>
+
+  <script>
+    $(document).ready(function() {
+      $('#registerBtn').click(function() {
+        console.log("Register button clicked");
+
+        $('.event-card').fadeToggle();
+      });
+    });
+  </script>
+
+</body>
+</html>

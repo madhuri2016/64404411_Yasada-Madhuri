@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Event Registration Debugging</title>
+  <style>
+    .error { color: red; }
+    .success { color: green; }
+  </style>
+</head>
+<body>
+
+  <h2>Event Registration Form</h2>
+
+  <form id="registrationForm">
+    <label>
+      Name: <input type="text" name="name" required />
+      <span class="error" id="nameError"></span>
+    </label><br/><br/>
+
+    <label>
+      Email: <input type="email" name="email" required />
+      <span class="error" id="emailError"></span>
+    </label><br/><br/>
+
+    <label>
+      Select Event:
+      <select name="eventSelect" required>
+        <option value="">-- Select an event --</option>
+        <option value="rock">Rock Concert</option>
+        <option value="baking">Baking Workshop</option>
+        <option value="tech">Tech Talk</option>
+      </select>
+      <span class="error" id="eventError"></span>
+    </label><br/><br/>
+
+    <button type="submit">Register</button>
+  </form>
+
+  <div id="message"></div>
+
+  <script>
+    const form = document.getElementById('registrationForm');
+    const nameInput = form.elements['name'];
+    const emailInput = form.elements['email'];
+    const eventSelect = form.elements['eventSelect'];
+
+    const nameError = document.getElementById('nameError');
+    const emailError = document.getElementById('emailError');
+    const eventError = document.getElementById('eventError');
+    const messageDiv = document.getElementById('message');
+
+    function clearErrors() {
+      nameError.textContent = '';
+      emailError.textContent = '';
+      eventError.textContent = '';
+      messageDiv.textContent = '';
+      messageDiv.className = '';
+    }
+
+    function validateForm() {
+      let valid = true;
+      clearErrors();
+
+      if (!nameInput.value.trim()) {
+        nameError.textContent = 'Name is required';
+        valid = false;
+      }
+      if (!emailInput.value.trim()) {
+        emailError.textContent = 'Email is required';
+        valid = false;
+      } else if (!emailInput.value.includes('@')) {
+        emailError.textContent = 'Invalid email format';
+        valid = false;
+      }
+      if (!eventSelect.value) {
+        eventError.textContent = 'Please select an event';
+        valid = false;
+      }
+
+      return valid;
+    }
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      console.log("Form submission started");
+
+      if (!validateForm()) {
+        console.log("Validation failed");
+        return;
+      }
+      console.log("Validation passed");
+
+      const userData = {
+        name: nameInput.value.trim(),
+        email: emailInput.value.trim(),
+        event: eventSelect.value,
+      };
+
+      console.log("Sending data:", userData);
+      messageDiv.textContent = "Submitting...";
+      messageDiv.className = '';
+
+      fetch('https://jsonplaceholder.typicode.com/posts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(userData)
+      })
+      .then(response => {
+        console.log("Fetch response received:", response);
+        if (!response.ok) throw new Error("Network response not ok");
+        return response.json();
+      })
+      .then(data => {
+        console.log("Success:", data);
+        messageDiv.textContent = "Registration successful!";
+        messageDiv.className = 'success';
+        form.reset();
+      })
+      .catch(error => {
+        console.error("Fetch error:", error);
+        messageDiv.textContent = "Registration failed. Please try again.";
+        messageDiv.className = 'error';
+      });
+    });
+  </script>
+
+</body>
+</html>
+

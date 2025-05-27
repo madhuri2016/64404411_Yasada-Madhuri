@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Async Event Loader</title>
+  <style>
+    .event-card {
+      border: 1px solid #ccc;
+      padding: 12px;
+      margin: 8px;
+      border-radius: 6px;
+      width: 300px;
+    }
+    #spinner {
+      display: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Community Events (Async)</h1>
+  <div id="spinner">Loading events...</div>
+  <div id="events-container"></div>
+
+  <script>
+    const container = document.querySelector("#events-container");
+    const spinner = document.querySelector("#spinner");
+
+    const apiURL = "https://jsonplaceholder.typicode.com/posts?_limit=5";
+
+    function fetchEventsWithThen() {
+      spinner.style.display = "block";
+      fetch(apiURL)
+        .then(response => {
+          if (!response.ok) throw new Error("Failed to fetch events");
+          return response.json();
+        })
+        .then(data => {
+          displayEvents(data);
+        })
+        .catch(error => {
+          container.innerHTML = `<p style="color:red;">Error: ${error.message}</p>`;
+        })
+        .finally(() => {
+          spinner.style.display = "none";
+        });
+    }
+
+    async function fetchEventsAsync() {
+      spinner.style.display = "block";
+      try {
+        const response = await fetch(apiURL);
+        if (!response.ok) throw new Error("Failed to fetch events");
+        const data = await response.json();
+        displayEvents(data);
+      } catch (error) {
+        container.innerHTML = `<p style="color:red;">Error: ${error.message}</p>`;
+      } finally {
+        spinner.style.display = "none";
+      }
+    }
+
+    function displayEvents(events) {
+      container.innerHTML = "";
+      events.forEach(event => {
+        const card = document.createElement("div");
+        card.className = "event-card";
+        card.innerHTML = `
+          <h3>${event.title}</h3>
+          <p>${event.body}</p>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+  
+    fetchEventsAsync();
+  </script>
+
+</body>
+</html>
